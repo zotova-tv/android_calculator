@@ -127,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clickEqualSigh() {
-
+        calculatorComponents.calculate();
+        calculatorIndicator.setText(calculatorComponents.getCalculatorIndicatorText());
     }
 
     private void clickDecimalSeparator(String value) {

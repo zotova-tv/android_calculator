@@ -90,4 +90,8 @@ public class CalculatorComponents implements Parcelable {
         this.value2 = null;
         this.action = null;
     }
+
+    public void calculate(){
+        // считаем результат, записываем в value 1. value 2 и action сбрасываем
+    }
 }
