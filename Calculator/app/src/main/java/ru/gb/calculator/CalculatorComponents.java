@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-import java.io.Serializable;
-
 public class CalculatorComponents implements Parcelable {
 
     private static final String TAG = "happy ";

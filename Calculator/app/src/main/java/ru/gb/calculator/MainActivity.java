@@ -98,15 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void clickDigit(String value) {
         if (calculatorComponents.getAction() == null) {
-            String value1 = calculatorComponents.getValue1();
-            if (value1 == null) {
+            if (calculatorComponents.getValue1() == null) {
                 calculatorComponents.setValue1(value);
             } else {
                 calculatorComponents.setValue1(calculatorComponents.getValue1() + value);
             }
         } else {
-            String value2 = calculatorComponents.getValue2();
-            if (value2 == null) {
+            if (calculatorComponents.getValue2() == null) {
                 calculatorComponents.setValue2(value);
             } else {
                 calculatorComponents.setValue2(calculatorComponents.getValue2() + value);
