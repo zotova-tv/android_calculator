@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="indicator_font_size">40sp</dimen>
+    <dimen name="indicator_padding">10dp</dimen>
+    <dimen name="indicator_height">0dp</dimen>
+    <dimen name="button_layout_width">0dp</dimen>
+    <dimen name="button_text_size">30sp</dimen>
+    <dimen name="button_height">70dp</dimen>
+    <dimen name="button_margin_left_right">2dp</dimen>
+    <dimen name="button_corner_radius">15dp</dimen>
+</resources>
