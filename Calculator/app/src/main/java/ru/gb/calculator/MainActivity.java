@@ -1,17 +1,27 @@
 package ru.gb.calculator;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "happy MainActivity";
     private static final String CALCULATOR_COMPONENTS_KEY = "CALCULATOR_COMPONENTS";
+    protected static final String CALCULATOR_SETTINGS_KEY = "CALCULATOR_SETTINGS";
+    protected static final String DARK_THEME_IS_CHECKED_KEY = "DARK_THEME_IS_CHECKED";
     private static final String VALUE_1 = "1";
     private static final String VALUE_2 = "2";
     private static final String VALUE_3 = "3";
@@ -23,48 +33,58 @@ public class MainActivity extends AppCompatActivity {
     private static final String VALUE_9 = "9";
     private static final String VALUE_0 = "0";
 
-    private static final String ADDITION = "+";
-    private static final String SUBTRACTION = "-";
-    private static final String DIVISION = "÷";
-    private static final String MULTIPLICATION = "×";
-    private static final String PERCENT = "%";
-    private static final String EQUAL = "=";
     private static final String DECIMAL_SEPARATOR = ",";
 
     private TextView calculatorIndicator;
 
-    CalculatorComponents calculatorComponents = new CalculatorComponents();
+    private CalculatorComponents calculatorComponents = new CalculatorComponents();
+    private SharedPreferences prefs;
+    private ActivityResultLauncher<Intent> calculatorSettingsLauncher;
+    Boolean darkThemeIsChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences(CALCULATOR_SETTINGS_KEY, MODE_PRIVATE);
+        darkThemeIsChecked = prefs.getBoolean(DARK_THEME_IS_CHECKED_KEY, false);
+
+        if(darkThemeIsChecked){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         if (savedInstanceState != null && savedInstanceState.containsKey(CALCULATOR_COMPONENTS_KEY)) {
             calculatorComponents = savedInstanceState.getParcelable(CALCULATOR_COMPONENTS_KEY);
         }
         Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
 
-        Button button1 = findViewById(R.id.button_1);
-        Button button2 = findViewById(R.id.button_2);
-        Button button3 = findViewById(R.id.button_3);
-        Button button4 = findViewById(R.id.button_4);
-        Button button5 = findViewById(R.id.button_5);
-        Button button6 = findViewById(R.id.button_6);
-        Button button7 = findViewById(R.id.button_7);
-        Button button8 = findViewById(R.id.button_8);
-        Button button9 = findViewById(R.id.button_9);
-        Button button0 = findViewById(R.id.button_0);
+        MaterialButton button1 = findViewById(R.id.button_1);
+        MaterialButton button2 = findViewById(R.id.button_2);
+        MaterialButton button3 = findViewById(R.id.button_3);
+        MaterialButton button4 = findViewById(R.id.button_4);
+        MaterialButton button5 = findViewById(R.id.button_5);
+        MaterialButton button6 = findViewById(R.id.button_6);
+        MaterialButton button7 = findViewById(R.id.button_7);
+        MaterialButton button8 = findViewById(R.id.button_8);
+        MaterialButton button9 = findViewById(R.id.button_9);
+        MaterialButton button0 = findViewById(R.id.button_0);
 
-        Button buttonAddition = findViewById(R.id.button_plus);
-        Button buttonSubtraction = findViewById(R.id.button_minus);
-        Button buttonDivision = findViewById(R.id.button_division);
-        Button buttonMultiplication = findViewById(R.id.button_multiplication);
-        Button buttonPercent = findViewById(R.id.button_percent);
-        Button buttonEqual = findViewById(R.id.button_equal_sign);
-        Button buttonDecimalSeparator = findViewById(R.id.button_decimal_separator);
+        MaterialButton buttonAddition = findViewById(R.id.button_plus);
+        MaterialButton buttonSubtraction = findViewById(R.id.button_minus);
+        MaterialButton buttonDivision = findViewById(R.id.button_division);
+        MaterialButton buttonMultiplication = findViewById(R.id.button_multiplication);
+        MaterialButton buttonPercent = findViewById(R.id.button_percent);
+        MaterialButton buttonEqual = findViewById(R.id.button_equal_sign);
+        MaterialButton buttonDecimalSeparator = findViewById(R.id.button_decimal_separator);
+        MaterialButton buttonChangeSign = findViewById(R.id.button_change_sign);
 
-        Button buttonResetIndicator = findViewById(R.id.button_reset_value);
+        MaterialButton buttonResetIndicator = findViewById(R.id.button_reset_value);
+
+        MaterialButton buttonSettings = findViewById(R.id.settings_button);
 
         calculatorIndicator = findViewById(R.id.calculatorIndicator);
 
@@ -80,15 +100,60 @@ public class MainActivity extends AppCompatActivity {
         button9.setOnClickListener(v -> clickDigit(VALUE_9));
         button0.setOnClickListener(v -> clickDigit(VALUE_0));
 
-        buttonAddition.setOnClickListener(v -> clickAction(ADDITION));
-        buttonSubtraction.setOnClickListener(v -> clickAction(SUBTRACTION));
-        buttonDivision.setOnClickListener(v -> clickAction(DIVISION));
-        buttonMultiplication.setOnClickListener(v -> clickAction(MULTIPLICATION));
-        buttonPercent.setOnClickListener(v -> clickAction(PERCENT));
+        buttonAddition.setOnClickListener(v -> clickAction(CalculatorComponents.ADDITION));
+        buttonSubtraction.setOnClickListener(v -> clickAction(CalculatorComponents.SUBTRACTION));
+        buttonDivision.setOnClickListener(v -> clickAction(CalculatorComponents.DIVISION));
+        buttonMultiplication.setOnClickListener(v -> clickAction(CalculatorComponents.MULTIPLICATION));
+        buttonPercent.setOnClickListener(v -> clickAction(CalculatorComponents.PERCENT));
         buttonEqual.setOnClickListener(v -> clickEqualSigh());
         buttonDecimalSeparator.setOnClickListener(v -> clickDecimalSeparator(DECIMAL_SEPARATOR));
+        buttonChangeSign.setOnClickListener(v -> clickChangeSign());
 
         buttonResetIndicator.setOnClickListener(v -> clickReset());
+
+        buttonSettings.setOnClickListener(v -> clickButtonSettings());
+
+        calculatorSettingsLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Intent data = result.getData();
+                    darkThemeIsChecked = data.getBooleanExtra(DARK_THEME_IS_CHECKED_KEY, darkThemeIsChecked);
+                    prefs.edit().putBoolean(DARK_THEME_IS_CHECKED_KEY, darkThemeIsChecked).apply();
+                    if (darkThemeIsChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }
+
+                }
+        );
+    }
+
+    private void clickButtonSettings() {
+        Intent calculatorSettingsActivityIntent = new Intent(this, CalculatorSettingsActivity.class);
+        calculatorSettingsLauncher.launch(calculatorSettingsActivityIntent);
+        // startActivity(calculatorSettingsActivityIntent);
+    }
+
+    private void clickChangeSign() {
+        if(calculatorComponents.getValue1() == null){
+            return;
+        }else if(calculatorComponents.getValue1() != null && calculatorComponents.getValue2() == null){
+            if(calculatorComponents.getValue1().startsWith("-")){
+                String value1 = calculatorComponents.getValue1();
+                calculatorComponents.setValue1(value1.substring(1, value1.length()));
+            }else{
+                calculatorComponents.setValue1("-" + calculatorComponents.getValue1());
+            }
+        }else if(calculatorComponents.getValue2() != null){
+            if(calculatorComponents.getValue2().startsWith("-")){
+                String value1 = calculatorComponents.getValue2();
+                calculatorComponents.setValue1(value1.substring(1, value1.length()));
+            }else{
+                calculatorComponents.setValue1(CalculatorComponents.SUBTRACTION + calculatorComponents.getValue2());
+            }
+        }
+        calculatorIndicator.setText(calculatorComponents.getCalculatorIndicatorText());
     }
 
     private void clickReset() {
@@ -150,6 +215,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(CALCULATOR_COMPONENTS_KEY, calculatorComponents);
-
     }
+
 }
