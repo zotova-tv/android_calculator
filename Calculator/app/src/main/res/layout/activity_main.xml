@@ -24,15 +24,15 @@
         <TextView
             android:id="@+id/calculatorIndicator"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/indicator_height"
             android:layout_gravity="bottom"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="40sp"
+            android:textSize="@dimen/indicator_font_size"
             android:textColor="@color/white"
             android:gravity="bottom|end"
-            android:padding="10dp"
+            android:padding="@dimen/indicator_padding"
             />
         <TableLayout
             android:id="@+id/buttonsLayout"
@@ -44,178 +44,152 @@
 
             <TableRow>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_reset_value"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/reset_value" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/reset_value"
+                    style="@style/OrangeButtonStyle"/>
 
-                <Button
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_change_sign"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/change_sign" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/change_sign"
+                    style="@style/DarkGreyButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_percent"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/percent" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/percent"
+                    style="@style/DarkGreyButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_division"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/division" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/division"
+                    style="@style/DarkGreyButtonStyle" />
             </TableRow>
 
             <TableRow>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/one" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/one"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/two" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/two"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_3"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/three" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/three"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_multiplication"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/multiplication" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/multiplication"
+                    style="@style/DarkGreyButtonStyle" />
             </TableRow>
 
             <TableRow>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_4"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/four" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/four"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_5"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/five" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/five"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_6"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/six" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/six"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_minus"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/minus" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/minus"
+                    style="@style/DarkGreyButtonStyle" />
             </TableRow>
 
             <TableRow>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_7"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/seven" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/seven"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_8"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/eight" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/eight"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_9"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/nine" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/nine"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_plus"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/dark_grey"
-                    android:text="@string/plus" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/plus"
+                    style="@style/DarkGreyButtonStyle" />
             </TableRow>
 
             <TableRow
                 android:weightSum="4">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_0"
-                    android:layout_span="2"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/zero" />
+                    android:layout_span="@integer/layout_span_2"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/zero"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_decimal_separator"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:text="@string/decimal_separator" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/decimal_separator"
+                    style="@style/CommonButtonStyle" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_equal_sign"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/equal_sign" />
+                    android:layout_width="@dimen/button_layout_width"
+                    android:layout_weight="@integer/weight_1"
+                    android:text="@string/equal_sign"
+                    style="@style/OrangeButtonStyle"/>
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CommonButtonStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:height">@dimen/button_height</item>
+        <item name="android:layout_marginLeft">@dimen/button_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/button_margin_left_right</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    </style>
+
+    <style name="DarkGreyButtonStyle" parent="CommonButtonStyle">
+        <item name="backgroundTint">@color/dark_grey</item>
+    </style>
+
+    <style name="OrangeButtonStyle" parent="CommonButtonStyle">
+        <item name="backgroundTint">@color/orange</item>
+    </style>
+</resources>
