@@ -79,7 +79,6 @@ public class CalculatorComponents implements Parcelable {
 
     public String getCalculatorIndicatorText() {
         Log.d(TAG, "getCalculatorIndicatorText() called");
-        System.out.println(value1 + " " + action + " " + value2);
         if (value1 == null) {
             return EMPTY_STRING;
         } else if (action == null) {
@@ -97,7 +96,6 @@ public class CalculatorComponents implements Parcelable {
     }
 
     public void calculate() {
-        System.out.println("calculate");
         // считаем результат, записываем в value 1. value 2 и action сбрасываем
         this.value1 = this.value1.replace(",", ".");
         this.value2 = this.value2.replace(",", ".");
@@ -106,23 +104,18 @@ public class CalculatorComponents implements Parcelable {
         Double result;
         switch (this.action) {
             case ADDITION:
-                System.out.println("case+");
                 result = operand1 + operand2;
                 break;
             case SUBTRACTION:
-                System.out.println("case-");
                 result = operand1 - operand2;
                 break;
             case MULTIPLICATION:
-                System.out.println("case*");
                 result = operand1 * operand2;
                 break;
             case DIVISION:
-                System.out.println("case/");
                 result = operand1 / operand2;
                 break;
             case PERCENT:
-                System.out.println("case%");
                 result = operand1 / 100 * operand2;
                 break;
             default:

@@ -46,7 +46,6 @@ public class CalculatorSettingsActivity extends AppCompatActivity {
     }
 
     private void checkDarkTheme(View v) {
-        System.out.println("checkbox is checked " + ((CheckBox) v).isChecked());
         checkboxDarkThemeIsChecked = ((CheckBox) v).isChecked();
     }
 }
