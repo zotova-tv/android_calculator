@@ -21,6 +21,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/DarkGreyButtonStyle"
+            android:textSize="@dimen/settings_button_text_size"
+            android:height="@dimen/settings_button_height"
+            app:cornerRadius="@dimen/settings_button_corner_radius"/>
+
         <TextView
             android:id="@+id/calculatorIndicator"
             android:layout_width="match_parent"
@@ -28,9 +40,9 @@
             android:layout_gravity="bottom"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_button"
             android:textSize="@dimen/indicator_font_size"
-            android:textColor="@color/white"
+            android:textColor="@color/extra_light_grey"
             android:gravity="bottom|end"
             android:padding="@dimen/indicator_padding"
             />
